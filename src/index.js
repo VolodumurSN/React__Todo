@@ -1,30 +1,10 @@
 import React from 'react';
 import ReactDOM from  'react-dom';
 
-const AppTime = () => {
-    return <span>{ (new Date()).toLocaleTimeString() }</span>;
-};
-
-const AppHeader = () => {
-    return <h1>My Todo List</h1>;
-};
-
-const SearchPanel = () => {
-    const searchText = 'Type here to search';
-
-    return <input placeholder={searchText} />;
-};
-
-const TodoList = () => {
-    const listItem = ['learn React', 'Build awesom app'];
-
-    return (
-        <ul>
-            <li>{ listItem[0] }</li>
-            <li>{ listItem[1] }</li>
-        </ul>
-    );
-};
+import AppTime from './components/app-time';
+import AppHeader from './components/app-header';
+import SearchPanel from './components/search-panel';
+import TodoList from './components/todo-list';
 
 const App = () => {
     return (
