@@ -1,15 +1,40 @@
-import React from 'react'
-import ReactDOM from  'react-dom'
+import React from 'react';
+import ReactDOM from  'react-dom';
 
-const el = (
-    <div>
-        <h1>My Todo List</h1>
-        <input placeholder="search" />
+const AppTime = () => {
+    return <span>{ (new Date()).toLocaleTimeString() }</span>;
+};
+
+const AppHeader = () => {
+    return <h1>My Todo List</h1>;
+};
+
+const SearchPanel = () => {
+    const searchText = 'Type here to search';
+
+    return <input placeholder={searchText} />;
+};
+
+const TodoList = () => {
+    const listItem = ['learn React', 'Build awesom app'];
+
+    return (
         <ul>
-            <li>Learn React</li>
-            <li>Build Awesom App</li>
+            <li>{ listItem[0] }</li>
+            <li>{ listItem[1] }</li>
         </ul>
-    </div>
-)
+    );
+};
 
-ReactDOM.render(el, document.getElementById('root'))
+const App = () => {
+    return (
+        <div>
+            <AppTime/>
+            <AppHeader />
+            <SearchPanel />
+            <TodoList />
+        </div>
+    );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
