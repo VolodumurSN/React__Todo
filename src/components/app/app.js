@@ -9,7 +9,6 @@ import TodoList from '../todo-list/todo-list';
 import './app.css';
 
 const App = () => {
-
     const todoData = [
         { id: 1, label: 'Drink Coffee' },
         { id: 2, label: 'Make React Todo' },
@@ -26,7 +25,9 @@ const App = () => {
                 <ItemStatusFilter />
             </div>
 
-            <TodoList todos={todoData} />
+            <TodoList
+                todos={todoData}
+                onDeleted={ id => console.log('del', id) } />
         </div>
     );
 };
