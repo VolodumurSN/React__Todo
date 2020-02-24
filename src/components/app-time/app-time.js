@@ -1,9 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-import './app-time.css'
+import './app-time.css';
 
-const AppTime = () => {
-    return <span>{ (new Date()).toLocaleTimeString() }</span>;
-};
+export default class AppTime extends Component {
 
-export default AppTime;
+    state = {
+        time: new Date().toLocaleTimeString()
+    };
+
+    componentDidMount = () => {
+        setInterval(() => this.onTick(), 1000 );
+    };
+
+    onTick = () => {
+        this.setState({
+            time: new Date().toLocaleTimeString()
+        });
+    };
+
+    render() {
+
+        return (
+            <span>
+                {this.state.time}
+            </span>
+        );
+    }
+}
