@@ -10,6 +10,9 @@ import TodoList from '../todo-list/todo-list';
 import './app.css';
 
 export default class App extends Component {
+
+    maxId = 100;
+
     state = {
         todoData: [
             { id: 1, label: 'Drink Coffee' },
@@ -18,22 +21,40 @@ export default class App extends Component {
         ]
     };
 
+    deleteItem = (id) => {
+
+        this.setState(({todoData}) => {
+
+            const idx = todoData.findIndex(el => id === el.id);
+
+            const newTodoData = [ ...todoData.slice(0, idx), ...todoData.slice(idx + 1) ];
+
+
+            return {
+                todoData: newTodoData
+            };
+        });
+    };
+
+    addItem = (text) => {
+
+        this.setState(({todoData}) => {
+
+
+            const addedItem = {
+                id: ++this.maxId,
+                label: text
+            };
+
+            const updatedTodoData = [ ...todoData.slice(), addedItem ];
+
+            return {
+                todoData: updatedTodoData
+            };
+        });
+    };
+
     render() {
-
-        const deleteItem = (id) => {
-
-            this.setState(({todoData}) => {
-
-                const idx = todoData.findIndex(el => id === el.id);
-
-                const newTodoData = [ ...todoData.slice(0, idx), ...todoData.slice(idx + 1) ];
-
-
-                return {
-                    todoData: newTodoData
-                };
-            });
-        };
 
         return (
             <div className="todo-app">
@@ -47,10 +68,10 @@ export default class App extends Component {
 
                 <TodoList
                     todos={ this.state.todoData }
-                    onDeleted={ (id) => deleteItem(id) }/>
+                    onDeleted={ this.deleteItem }/>
 
                 <ItemAdd
-                    onAdd={ (text) => console.log('Adding success', text) }/>
+                    onAdd={ this.addItem }/>
             </div>
         );
     }
