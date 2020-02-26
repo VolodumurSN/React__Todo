@@ -4,6 +4,7 @@ import AppTime from '../app-time/app-time';
 import AppHeader from '../app-header/app-header';
 import SearchPanel from '../search-panel/search-panel';
 import ItemStatusFilter from '../item-status-filter/item-status-filter';
+import ItemAdd from '../item-add/item-add';
 import TodoList from '../todo-list/todo-list';
 
 import './app.css';
@@ -47,6 +48,9 @@ export default class App extends Component {
                 <TodoList
                     todos={ this.state.todoData }
                     onDeleted={ (id) => deleteItem(id) }/>
+
+                <ItemAdd
+                    onAdd={ (text) => console.log('Adding success', text) }/>
             </div>
         );
     }

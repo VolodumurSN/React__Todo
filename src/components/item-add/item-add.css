@@ -1,0 +1,9 @@
+.add-group {
+    margin-top: 5px;
+    font-size: 1.25rem;
+}
+
+.add-group button {
+    width: 55px;
+    margin: 3px;
+}
