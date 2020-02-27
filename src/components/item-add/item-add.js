@@ -1,23 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import './item-add.css';
 
-const ItemAdd = ({ onAdd }) => {
-    return (
+export default class ItemAdd extends Component {
 
-        <div className="add-group">
+    render() {
+        return (
 
-            <button type="button"
-                    className="btn btn-outline-secondary btn-sm"
-                    onClick={ () => onAdd('Hello App') }>
+            <div className="add-group">
 
-                <i className="fa fa-plus" />
-            </button>
+                <button type="button"
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={ () => this.props.onAdd('Hello App') }>
 
-        </div>
+                    <i className="fa fa-plus" />
+                </button>
 
+            </div>
 
-    );
-};
-
-export default ItemAdd;
+        );
+    }
+}
