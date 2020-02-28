@@ -4,19 +4,44 @@ import './item-add.css';
 
 export default class ItemAdd extends Component {
 
+    state = {
+        label: ''
+    };
+
+    onLabelChange = event => {
+        this.setState({
+            label: event.target.value
+        });
+    };
+
+    onSubmit = event => {
+        event.preventDefault();
+
+        this.props.onAdd(this.state.label);
+        this.setState({
+            label: ''
+        });
+    };
+
     render() {
         return (
 
-            <div className="add-group">
+            <form className="add-group d-flex"
+                  onSubmit={this.onSubmit}>
 
-                <button type="button"
-                        className="btn btn-outline-secondary btn-sm"
-                        onClick={ () => this.props.onAdd('Hello App') }>
+                <input type="text"
+                       className="form-control"
+                       onChange={this.onLabelChange}
+                       placeholder="What needs to be done"
+                       value={this.state.label} /> {/* control html element */}
+
+                <button type="submit"
+                        className="btn btn-outline-secondary btn-sm">
 
                     <i className="fa fa-plus" />
                 </button>
 
-            </div>
+            </form>
 
         );
     }
