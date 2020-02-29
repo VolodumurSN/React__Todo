@@ -18,7 +18,9 @@ export default class App extends Component {
             this.createTodoItem('Drink Coffee'),
             this.createTodoItem('Make React Todo'),
             this.createTodoItem('Have a lunch')
-        ]
+        ],
+
+        itemToSearch: ''
     };
 
     createTodoItem(label) {
@@ -59,30 +61,20 @@ export default class App extends Component {
         });
     };
 
-    searchItem = (searchText) => {
-        if (searchText.length !== 0) {
+    search = (searchText) => {
+        this.setState({
+            itemToSearch: searchText
+        });
+    };
 
-            this.setState(({ todoData }) => {
-
-                const idx = todoData.findIndex(el => {
-
-                    return el.label.toLowerCase().includes(searchText) === true;
-                });
-
-                if (idx !== -1) {
-                    const newTodoData = [
-                        todoData[idx],
-                        ...todoData.slice(0, idx),
-                        ...todoData.slice(idx + 1)
-                    ];
-
-                    return {
-                        todoData: newTodoData
-                    };
-                }
-            });
+    searchItem = (todoData, itemToSearch) => {
+        if (itemToSearch.length === 0) {
+            return todoData;
         }
 
+        return todoData.filter(el => {
+            return el.label.toLowerCase().includes(itemToSearch);
+        });
     };
 
     toggleProperty = (arr, id, propName) => {
@@ -119,11 +111,12 @@ export default class App extends Component {
 
     render() {
 
-        const { todoData } = this.state;
+        const { todoData, itemToSearch } = this.state;
 
         const doneCount = todoData.filter(el => el.done).length;
-
         const todoCount = todoData.length - doneCount;
+
+        const visibleItems = this.searchItem(todoData, itemToSearch);
 
         return (
             <div className="todo-app">
@@ -132,12 +125,12 @@ export default class App extends Component {
 
                 <div className="top-panel d-flex">
                     <SearchPanel
-                        onSearch={ this.searchItem } />
+                        onSearch={ this.search } />
                     <ItemStatusFilter />
                 </div>
 
                 <TodoList
-                    todos={ todoData }
+                    todos={ visibleItems }
                     onDeleted={ this.deleteItem }
                     onToggleImportant={ this.onToggleImportant }
                     onToggleDone={ this.onToggleDone } />
