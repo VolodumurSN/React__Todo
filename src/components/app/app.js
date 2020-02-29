@@ -59,6 +59,32 @@ export default class App extends Component {
         });
     };
 
+    searchItem = (searchText) => {
+        if (searchText.length !== 0) {
+
+            this.setState(({ todoData }) => {
+
+                const idx = todoData.findIndex(el => {
+
+                    return el.label.toLowerCase().includes(searchText) === true;
+                });
+
+                if (idx !== -1) {
+                    const newTodoData = [
+                        todoData[idx],
+                        ...todoData.slice(0, idx),
+                        ...todoData.slice(idx + 1)
+                    ];
+
+                    return {
+                        todoData: newTodoData
+                    };
+                }
+            });
+        }
+
+    };
+
     toggleProperty = (arr, id, propName) => {
         // 1. Update object
         const idx = arr.findIndex(el => id === el.id);
@@ -105,7 +131,8 @@ export default class App extends Component {
                 <AppHeader toDo={todoCount} done={doneCount} />
 
                 <div className="top-panel d-flex">
-                    <SearchPanel />
+                    <SearchPanel
+                        onSearch={ this.searchItem } />
                     <ItemStatusFilter />
                 </div>
 
