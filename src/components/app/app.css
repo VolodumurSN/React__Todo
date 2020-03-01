@@ -6,3 +6,15 @@
 .top-panel {
     margin: 1rem 0;
 }
+
+.btn-outline-secondary {
+    border-color: #eee;
+    color: #9bb1c4;
+}
+
+.btn-group, .btn, .btn+.btn, .btn-group .btn+.btn-group>.dropdown-toggle {
+    -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+

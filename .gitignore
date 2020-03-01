@@ -6,3 +6,6 @@
 
 /node_modules/
 /dist/
+/coverage/
+/build/
+npm-debug.log*
