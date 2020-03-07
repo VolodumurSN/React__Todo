@@ -8,9 +8,10 @@ export default class AppTime extends Component {
         time: new Date().toLocaleTimeString()
     };
 
-    componentDidMount = () => {
-        setInterval(() => this.onTick(), 1000 );
-    };
+    constructor() {
+        super();
+        setInterval(this.onTick, 1000);
+    }
 
     onTick = () => {
         this.setState({
